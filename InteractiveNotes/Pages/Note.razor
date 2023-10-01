@@ -1,0 +1,57 @@
+﻿@page "/note/{NoteId:int}"
+@inject NoteService NoteService
+@inject NavigationManager NavigationManager
+
+@using InteractiveNotes.Data
+@using Microsoft.AspNetCore.Components
+
+@code {
+    [Parameter] public int NoteId { get; set; }
+    private NoteDto NoteData { get; set; }
+    private bool IsExpanded { get; set; } = false;
+    private bool IsEditing { get; set; } = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        NoteData = await NoteService.GetNoteByIdAsync(NoteId);
+    }
+
+    private void ToggleExpand()
+    {
+        IsExpanded = !IsExpanded;
+    }
+
+    private async void DeleteNote()
+    {
+        await NoteService.DeleteNoteAsync(NoteId);
+        NavigationManager.NavigateTo("/", true);
+    }
+
+    private void EditNote()
+    {
+        IsEditing = true;
+    }
+    private async void SaveNote()
+    {
+        await NoteService.UpdateNoteAsync(NoteData);
+        IsEditing = false;
+    }
+
+    private int DaysSinceLastModified => (DateTime.Now - NoteData.LastModified).Days;
+}
+
+
+<div class="note" @onclick="() => ToggleExpand()">
+    <span class="title">@NoteData.Title</span>
+    <span class="date">@DaysSinceLastModified days ago</span>
+    <div class="actions">
+        <button @onclick="() => DeleteNote()">Delete</button>
+        <button @onclick="() => EditNote()">Edit</button>
+    </div>
+    @if (IsExpanded)
+    {
+        <div class="content">
+            @NoteData.Content
+        </div>
+    }
+</div>

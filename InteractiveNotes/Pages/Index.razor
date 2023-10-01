@@ -1,0 +1,30 @@
+﻿@page "/"
+@using InteractiveNotes.Data;
+@inject NoteService NoteService
+
+<div class="top-panel">
+    <button @onclick="CreateNewNote">New Note</button>
+    <input type="text" @bind="searchTerm" placeholder="Search notes..." />
+    <span>Total notes: @notes.Count()</span>
+</div>
+
+@foreach (var note in notes.Where(n => n.Title.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) || n.Content.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)))
+{
+    <Note NoteId="note.NoteId" />
+}
+
+@code {
+    private List<NoteDto> notes = new List<NoteDto>();
+    private string searchTerm = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        notes = (await NoteService.GetAllNotesAsync()).ToList();
+        await base.OnInitializedAsync();
+    }
+
+    private void CreateNewNote()
+    {
+        // Logic for creating a new note
+    }
+}
