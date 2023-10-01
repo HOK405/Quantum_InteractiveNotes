@@ -31,9 +31,14 @@ namespace InteractiveNotes.Data.Repositories
 
         public async Task UpdateNoteAsync(Note note)
         {
-            _context.Notes.Update(note);
-            await _context.SaveChangesAsync();
+            var existingNote = await _context.Notes.FindAsync(note.NoteId);
+            if (existingNote != null)
+            {
+                _context.Entry(existingNote).CurrentValues.SetValues(note);
+                await _context.SaveChangesAsync();
+            }
         }
+
 
         public async Task DeleteNoteAsync(int id)
         {

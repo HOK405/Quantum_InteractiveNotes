@@ -10,6 +10,8 @@
     private NoteDto NoteData { get; set; }
 
     private string viewButtonLabel = "View note"; 
+    private string editButtonLabel = "Edit note"; 
+    private string originalContent;
 
     private bool IsExpanded { get; set; } = false;
     private bool IsEditing { get; set; } = false;
@@ -22,7 +24,7 @@
     private void ToggleExpand()
     {
         IsExpanded = !IsExpanded;
-        viewButtonLabel = IsExpanded ? "Hide note" : "View note"; // зміна тексту на кнопці
+        viewButtonLabel = IsExpanded ? "Hide note" : "View note"; 
     }
 
     private async void DeleteNote()
@@ -33,12 +35,30 @@
 
     private void EditNote()
     {
-        IsEditing = true;
+        if (!IsExpanded) 
+        {
+            ToggleExpand(); 
+        }
+
+        if (IsEditing)
+        {
+            IsEditing = false;
+            editButtonLabel = "Edit note";
+            NoteData.Content = originalContent; 
+        }
+        else
+        {
+            IsEditing = true;
+            editButtonLabel = "Stop editing";
+            originalContent = NoteData.Content; 
+        }
     }
+
     private async void SaveNote()
     {
         await NoteService.UpdateNoteAsync(NoteData);
         IsEditing = false;
+        editButtonLabel = "Edit note"; 
     }
 
     private int DaysSinceLastModified => (DateTime.Now - NoteData.LastModified).Days;
@@ -49,15 +69,27 @@
     <span class="title">@NoteData.Title</span>
     <span class="date">@DaysSinceLastModified days ago</span>
     <div class="actions">
-        <button @onclick="() => DeleteNote()">Delete</button>
-        <button @onclick="() => ToggleExpand()">@viewButtonLabel</button> 
-        <button @onclick="() => EditNote()">Edit note</button>
+        <button @onclick="() => ToggleExpand()">@viewButtonLabel</button>
+        <button @onclick="() => EditNote()">@editButtonLabel</button>
     </div>
     @if (IsExpanded)
     {
-        <div class="content">
-            @NoteData.Content
+        @if (IsEditing)
+        {
+            <textarea @bind="NoteData.Content" class="editing-area"></textarea>
+            <button @onclick="() => SaveNote()">Save</button>
+        }
+        else
+        {
+            <div class="content">
+                @NoteData.Content
+            </div>
+        }
+        <div>
+            <button @onclick="() => DeleteNote()">Delete</button>
         </div>
     }
 </div>
+
+
 
