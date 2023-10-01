@@ -8,6 +8,9 @@
 @code {
     [Parameter] public int NoteId { get; set; }
     private NoteDto NoteData { get; set; }
+
+    private string viewButtonLabel = "View note"; 
+
     private bool IsExpanded { get; set; } = false;
     private bool IsEditing { get; set; } = false;
 
@@ -19,6 +22,7 @@
     private void ToggleExpand()
     {
         IsExpanded = !IsExpanded;
+        viewButtonLabel = IsExpanded ? "Hide note" : "View note"; // зміна тексту на кнопці
     }
 
     private async void DeleteNote()
@@ -41,12 +45,13 @@
 }
 
 
-<div class="note" @onclick="() => ToggleExpand()">
+<div class="note">
     <span class="title">@NoteData.Title</span>
     <span class="date">@DaysSinceLastModified days ago</span>
     <div class="actions">
         <button @onclick="() => DeleteNote()">Delete</button>
-        <button @onclick="() => EditNote()">Edit</button>
+        <button @onclick="() => ToggleExpand()">@viewButtonLabel</button> 
+        <button @onclick="() => EditNote()">Edit note</button>
     </div>
     @if (IsExpanded)
     {
@@ -55,3 +60,4 @@
         </div>
     }
 </div>
+
