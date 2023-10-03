@@ -14,4 +14,8 @@
     <ProjectReference Include="..\InteractiveNotes.Data\InteractiveNotes.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\fonts\" />
+  </ItemGroup>
+
 </Project>

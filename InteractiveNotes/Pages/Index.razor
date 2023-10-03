@@ -4,7 +4,7 @@
 
 
 <div class="top-panel">
-    <button @onclick="() => createNoteModal.ShowModal()">New Note</button>
+    <button @onclick="() => createNoteModal.ShowModal()">New note</button>
     <input type="text" @bind="searchTerm" placeholder="Search notes..." />
     <span>Total notes: @notes.Count()</span>
 </div>
@@ -25,10 +25,5 @@
     {
         notes = (await NoteService.GetAllNotesAsync()).ToList();
         await base.OnInitializedAsync();
-    }
-
-    private void CreateNewNote()
-    {
-        // Logic for creating a new note
     }
 }

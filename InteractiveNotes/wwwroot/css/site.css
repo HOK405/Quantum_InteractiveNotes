@@ -1,7 +1,14 @@
-@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
+﻿@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
+
+@font-face {
+    font-family: 'Product Sans';
+    src: url('../fonts/Product Sans Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
 
 html, body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: 'Product Sans', Helvetica, Arial, sans-serif;
 }
 
 h1:focus {
@@ -68,7 +75,7 @@ a, .btn-link {
 }
 
 
-/* Style for notes */
+/* STYLES FOR NOTES */
 
 .top-panel {
     display: flex;
@@ -124,7 +131,7 @@ button {
 }
 
 
-/*Modal window*/
+/* MODAL WINDOW */
 .modal {
     display: none;
     position: fixed;
@@ -140,10 +147,10 @@ button {
 
 .modal-content {
     background-color: #fefefe;
-    margin: 15% auto;
+    margin: 5% auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 50%;
+    width: 40%;
 }
 
 .close {
@@ -158,4 +165,43 @@ button {
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+/* Title input style */
+.title-input {
+    font-weight: bold;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    height: 50px;
+}
+
+/* Text area style */
+.note-textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px; 
+    box-sizing: border-box;
+    border-radius: 5px;
+    min-height: 100px;
+}
+
+/* Add button style */
+.add-note-button {
+    display: block; /* Set the display to block */
+    margin-left: auto; /* Set left margin to auto */
+    margin-right: auto; /* Set right margin to auto */
+    width: 30%; /* Set the width as you mentioned */
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+.add-note-button:hover {
+    background-color: #45a049;
 }

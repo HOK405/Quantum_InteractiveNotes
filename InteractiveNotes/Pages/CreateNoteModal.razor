@@ -4,12 +4,12 @@
 <div class="modal" style="display:@(isVisible ? "block" : "none")">
     <div class="modal-content">
         <span class="close" @onclick="CloseModal">&times;</span>
-        <h2>Create New Note</h2>
+        <h2>Create new note</h2>
         <label>Title:</label>
-        <input @bind="newNote.Title" type="text" placeholder="Note title..." />
+        <input @bind="newNote.Title" type="text" placeholder="Note title..." class="title-input" />
         <label>Content:</label>
-        <textarea @bind="newNote.Content" placeholder="Note content..."></textarea>
-        <button @onclick="AddNote">Add Note</button>
+        <textarea @bind="newNote.Content" placeholder="Note content..." class="note-textarea"></textarea>
+        <button @onclick="AddNote" class="add-note-button">Add note</button>
     </div>
 </div>
 
