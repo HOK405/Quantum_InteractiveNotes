@@ -5,7 +5,7 @@
 
 <div class="top-panel">
     <button @onclick="() => createNoteModal.ShowModal()">New note</button>
-    <input type="text" @bind="searchTerm" placeholder="Search notes..." />
+    <input type="text" @bind="searchTerm" @bind:event="oninput" placeholder="Search notes..." />
     <span>Total notes: @notes.Count()</span>
 </div>
 
@@ -21,19 +21,26 @@
 
     protected override async Task OnInitializedAsync()
     {
-        notes = (await NoteService.GetAllNotesAsync()).ToList();
-        createNoteModal.OnNoteAdded += RefreshNotes;
+        await RefreshNotes();
         await base.OnInitializedAsync();
     }
 
-    private void RefreshNotes()
-    {     
-        InvokeAsync(async () =>
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
         {
-            notes = (await NoteService.GetAllNotesAsync()).ToList();
+            createNoteModal.OnNoteAdded += OnNoteAddedHandler;
+        }
+    }
 
-            StateHasChanged();
-        });
+    private void OnNoteAddedHandler()
+    {
+        _ = RefreshNotes();
+    }
+
+    private async Task RefreshNotes()
+    {
+        notes = (await NoteService.GetAllNotesAsync()).ToList();
+        StateHasChanged();
     }
 }
-

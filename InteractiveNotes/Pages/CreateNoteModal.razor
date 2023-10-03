@@ -2,7 +2,7 @@
 @inject NoteService NoteService
 
 @code {
-    public event Action OnNoteAdded;
+    public event Action? OnNoteAdded;
 
     private NoteDto newNote = new NoteDto();
     private bool isVisible = false;
