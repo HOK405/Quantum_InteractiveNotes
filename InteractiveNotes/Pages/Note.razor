@@ -1,13 +1,11 @@
-﻿@page "/note/{NoteId:int}"
-@inject NoteService NoteService
+﻿@inject NoteService NoteService
 @inject NavigationManager NavigationManager
 
 @using InteractiveNotes.Data
 @using Microsoft.AspNetCore.Components
 
 @code {
-    [Parameter] public int NoteId { get; set; }
-    private NoteDto NoteData { get; set; }
+    [Parameter] public NoteDto? NoteData { get; set; }
 
     private string viewButtonLabel = "View note";
     private string editButtonLabel = "Edit note";
@@ -17,9 +15,9 @@
     private bool IsExpanded { get; set; } = false;
     private bool IsEditing { get; set; } = false;
 
-    protected override async Task OnInitializedAsync()
+    protected override Task OnInitializedAsync()
     {
-        NoteData = await NoteService.GetNoteByIdAsync(NoteId);
+        return base.OnInitializedAsync();
     }
 
     private void ToggleExpand()
@@ -37,7 +35,7 @@
 
     private async void DeleteNote()
     {
-        await NoteService.DeleteNoteAsync(NoteId);
+        await NoteService.DeleteNoteAsync(NoteData.NoteId);
         NavigationManager.NavigateTo("/", true);
     }
 

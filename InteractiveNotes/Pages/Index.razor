@@ -11,7 +11,7 @@
 
 @foreach (var note in notes.Where(n => n.Title.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) || n.Content.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)))
 {
-    <Note NoteId="note.NoteId" />
+    <Note NoteData="@note" />
 }
 
 @code {
