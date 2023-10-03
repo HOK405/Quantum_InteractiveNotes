@@ -8,6 +8,6 @@
 
         public string Content { get; set; }
 
-        public DateTime LastModified { get; set; }
+        public DateTime CreatingDate { get; set; }
     }
 }

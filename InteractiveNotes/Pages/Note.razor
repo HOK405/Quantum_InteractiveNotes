@@ -61,7 +61,7 @@
         editButtonLabel = "Edit note"; 
     }
 
-    private int DaysSinceLastModified => (DateTime.Now - NoteData.LastModified).Days;
+    private int DaysSinceLastModified => (DateTime.Now - NoteData.CreatingDate).Days;
 }
 
 

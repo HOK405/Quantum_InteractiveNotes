@@ -2,8 +2,9 @@
 @using InteractiveNotes.Data;
 @inject NoteService NoteService
 
+
 <div class="top-panel">
-    <button @onclick="CreateNewNote">New Note</button>
+    <button @onclick="() => createNoteModal.ShowModal()">New Note</button>
     <input type="text" @bind="searchTerm" placeholder="Search notes..." />
     <span>Total notes: @notes.Count()</span>
 </div>
@@ -13,9 +14,12 @@
     <Note NoteId="note.NoteId" />
 }
 
+<CreateNoteModal @ref="createNoteModal" />
+
 @code {
     private List<NoteDto> notes = new List<NoteDto>();
     private string searchTerm = string.Empty;
+    private CreateNoteModal createNoteModal;
 
     protected override async Task OnInitializedAsync()
     {

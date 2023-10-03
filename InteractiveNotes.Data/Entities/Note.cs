@@ -25,6 +25,6 @@ namespace InteractiveNotes.Data.Entities
         public string Content { get; set; }
 
         [Column("lastmodified")]
-        public DateTime LastModified { get; set; }
+        public DateTime CreatingDate { get; set; }
     }
 }

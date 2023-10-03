@@ -15,7 +15,7 @@ namespace TestForPostgre
 
             foreach (var item in data)
             {
-                Console.WriteLine($"ID: {item.NoteId}, Title: {item.Title}, Content: {item.Content}, Last Modified: {item.LastModified:G}");
+                Console.WriteLine($"ID: {item.NoteId}, Title: {item.Title}, Content: {item.Content}, Last Modified: {item.CreatingDate:G}");
             }
         }
     }

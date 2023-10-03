@@ -16,7 +16,7 @@ namespace InteractiveNotes.Data.EF
         {
             modelBuilder.Entity<Note>(entity =>
             {
-                entity.Property(e => e.LastModified)
+                entity.Property(e => e.CreatingDate)
                       .HasColumnType("timestamp without time zone")
                       .HasDefaultValueSql("CURRENT_TIMESTAMP"); 
             });

@@ -1,0 +1,37 @@
+﻿@using InteractiveNotes.Data;
+@inject NoteService NoteService
+
+<div class="modal" style="display:@(isVisible ? "block" : "none")">
+    <div class="modal-content">
+        <span class="close" @onclick="CloseModal">&times;</span>
+        <h2>Create New Note</h2>
+        <label>Title:</label>
+        <input @bind="newNote.Title" type="text" placeholder="Note title..." />
+        <label>Content:</label>
+        <textarea @bind="newNote.Content" placeholder="Note content..."></textarea>
+        <button @onclick="AddNote">Add Note</button>
+    </div>
+</div>
+
+@code {
+    private NoteDto newNote = new NoteDto();
+    private bool isVisible = false;
+
+    public void ShowModal()
+    {
+        isVisible = true;
+        StateHasChanged();
+    }
+
+    private void CloseModal()
+    {
+        isVisible = false;
+        newNote = new NoteDto();
+    }
+
+    private async Task AddNote()
+    {
+        await NoteService.AddNoteAsync(newNote);
+        CloseModal();
+    }
+}
