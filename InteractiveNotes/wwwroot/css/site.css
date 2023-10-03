@@ -82,19 +82,20 @@ button {
 /* STYLES FOR NOTES CONTENT */
 
 .top-panel {
+    background-color: lightgray;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
 }
 
 .note {
     padding: 1px;
     margin: 10px 0;
-    background-color: #f0f0f0;
+    background-color: #f7f1cb;
     border: 1px solid #ddd;
     border-radius: 5px;
-    cursor: pointer;
 }
 
 .note .title {
@@ -118,12 +119,20 @@ button {
 }
 
 .note .content {
-    padding: 10px;
+    padding:10px;
     margin-bottom: 10px;
 }
 
 .note .actions {
-    margin: 0; /* adjust margin as needed */
+    margin: 0; 
+}
+
+.right-actions {
+    text-align: center; 
+}
+
+.right-actions button:first-child {
+    margin: 10px 10px 10px 0px;
 }
 
 .note .actions button {
@@ -131,8 +140,8 @@ button {
 }
 
 .editing-area {
-    margin-top: 10px;
-    width: 100%;
+    margin: 0px 10px 0px 10px;
+    width: 99%;
     min-height:50px;
 }
 
@@ -160,6 +169,7 @@ button {
 }
 
 .modal-content {
+    position: relative; 
     background-color: #fefefe;
     margin: 5% auto;
     padding: 20px;
@@ -168,18 +178,22 @@ button {
 }
 
 .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
     color: #aaa;
-    float: right;
     font-size: 28px;
     font-weight: bold;
 }
 
 .close:hover,
 .close:focus {
-    color: black;
+    color: red;
     text-decoration: none;
     cursor: pointer;
 }
+
+
 
 /* Title input style */
 .title-input {

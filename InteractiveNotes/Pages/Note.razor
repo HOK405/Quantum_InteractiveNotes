@@ -96,16 +96,19 @@
         @if (IsEditing)
         {
             <textarea @bind="NoteData.Content" class="editing-area"></textarea>
-            <button @onclick="() => SaveNote()">Save</button>
+            <div class="right-actions">
+                <button @onclick="() => SaveNote()">Save</button>
+                <button @onclick="() => DeleteNote()">Delete</button>
+            </div>
         }
         else
         {
             <div class="content">
                 @NoteData.Content
             </div>
+            <div class="right-actions">
+                <button @onclick="() => DeleteNote()">Delete</button>
+            </div>
         }
-        <div>
-            <button @onclick="() => DeleteNote()">Delete</button>
-        </div>
     }
 </div>

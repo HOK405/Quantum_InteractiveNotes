@@ -22,6 +22,7 @@
     private async Task AddNote()
     {
         await NoteService.AddNoteAsync(newNote);
+
         CloseModal();
 
         OnNoteAdded?.Invoke();
@@ -31,11 +32,13 @@
 <div class="modal" style="display:@(isVisible ? "block" : "none")">
     <div class="modal-content">
         <span class="close" @onclick="CloseModal">&times;</span>
-        <h2>Create new note</h2>
-        <label>Title:</label>
-        <input @bind="newNote.Title" type="text" placeholder="Note title..." class="title-input" />
-        <label>Content:</label>
-        <textarea @bind="newNote.Content" placeholder="Note content..." class="note-textarea"></textarea>
-        <button @onclick="AddNote" class="add-note-button">Add note</button>
+        <div class="modal-body">
+            <h2>Create new note</h2>
+            <label>Title:</label>
+            <input @bind="newNote.Title" type="text" placeholder="Note title..." class="title-input" />
+            <label>Content:</label>
+            <textarea @bind="newNote.Content" placeholder="Note content..." class="note-textarea"></textarea>
+            <button @onclick="AddNote" class="add-note-button">Add note</button>
+        </div> 
     </div>
 </div>
