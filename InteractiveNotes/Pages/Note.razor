@@ -9,9 +9,10 @@
     [Parameter] public int NoteId { get; set; }
     private NoteDto NoteData { get; set; }
 
-    private string viewButtonLabel = "View note"; 
-    private string editButtonLabel = "Edit note"; 
+    private string viewButtonLabel = "View note";
+    private string editButtonLabel = "Edit note";
     private string originalContent;
+    private string originalTitle;
 
     private bool IsExpanded { get; set; } = false;
     private bool IsEditing { get; set; } = false;
@@ -23,8 +24,15 @@
 
     private void ToggleExpand()
     {
+        if (IsEditing && IsExpanded)
+        {
+            NoteData.Content = originalContent;
+            NoteData.Title = originalTitle;
+            IsEditing = false;
+            editButtonLabel = "Edit note";
+        }
         IsExpanded = !IsExpanded;
-        viewButtonLabel = IsExpanded ? "Hide note" : "View note"; 
+        viewButtonLabel = IsExpanded ? "Hide note" : "View note";
     }
 
     private async void DeleteNote()
@@ -35,22 +43,24 @@
 
     private void EditNote()
     {
-        if (!IsExpanded) 
+        if (!IsExpanded)
         {
-            ToggleExpand(); 
+            IsExpanded = true; 
         }
 
         if (IsEditing)
         {
             IsEditing = false;
             editButtonLabel = "Edit note";
-            NoteData.Content = originalContent; 
+            NoteData.Content = originalContent;
+            NoteData.Title = originalTitle;
         }
         else
         {
             IsEditing = true;
             editButtonLabel = "Stop editing";
-            originalContent = NoteData.Content; 
+            originalContent = NoteData.Content;
+            originalTitle = NoteData.Title;
         }
     }
 
@@ -58,7 +68,7 @@
     {
         await NoteService.UpdateNoteAsync(NoteData);
         IsEditing = false;
-        editButtonLabel = "Edit note"; 
+        editButtonLabel = "Edit note";
     }
 
     private int DaysSinceLastModified => (DateTime.Now - NoteData.CreatingDate).Days;
@@ -66,7 +76,14 @@
 
 
 <div class="note">
-    <span class="title">@NoteData.Title</span>
+    @if (IsEditing) 
+    {
+        <input @bind="NoteData.Title" class="title-edit" />
+    }
+    else
+    {
+        <span class="title">@NoteData.Title</span>
+    }
     <span class="date">@DaysSinceLastModified days ago</span>
     <div class="actions">
         <button @onclick="() => ToggleExpand()">@viewButtonLabel</button>
@@ -90,6 +107,3 @@
         </div>
     }
 </div>
-
-
-
