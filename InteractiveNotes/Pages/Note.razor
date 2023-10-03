@@ -76,18 +76,20 @@
 
 
 <div class="note">
-    @if (IsEditing) 
-    {
-        <input @bind="NoteData.Title" class="title-edit" />
-    }
-    else
-    {
-        <span class="title">@NoteData.Title</span>
-    }
-    <span class="date">@DaysSinceLastModified days ago</span>
-    <div class="actions">
-        <button @onclick="() => ToggleExpand()">@viewButtonLabel</button>
-        <button @onclick="() => EditNote()">@editButtonLabel</button>
+    <div class="header">
+        @if (IsEditing)
+        {
+            <input @bind="NoteData.Title" class="title-edit" />
+        }
+        else
+        {
+            <span class="title">@NoteData.Title</span>
+        }
+        <span class="date">@DaysSinceLastModified days ago</span>
+        <div class="actions">
+            <button @onclick="() => ToggleExpand()">@viewButtonLabel</button>
+            <button @onclick="() => EditNote()">@editButtonLabel</button>
+        </div>
     </div>
     @if (IsExpanded)
     {

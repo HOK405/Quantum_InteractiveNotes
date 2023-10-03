@@ -1,7 +1,7 @@
 ﻿@page "/"
 @using InteractiveNotes.Data;
 @inject NoteService NoteService
-
+<CreateNoteModal @ref="createNoteModal" />
 
 <div class="top-panel">
     <button @onclick="() => createNoteModal.ShowModal()">New note</button>
@@ -14,8 +14,6 @@
     <Note NoteId="note.NoteId" />
 }
 
-<CreateNoteModal @ref="createNoteModal" />
-
 @code {
     private List<NoteDto> notes = new List<NoteDto>();
     private string searchTerm = string.Empty;
@@ -24,6 +22,18 @@
     protected override async Task OnInitializedAsync()
     {
         notes = (await NoteService.GetAllNotesAsync()).ToList();
+        createNoteModal.OnNoteAdded += RefreshNotes;
         await base.OnInitializedAsync();
     }
+
+    private void RefreshNotes()
+    {     
+        InvokeAsync(async () =>
+        {
+            notes = (await NoteService.GetAllNotesAsync()).ToList();
+
+            StateHasChanged();
+        });
+    }
 }
+
