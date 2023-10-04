@@ -4,6 +4,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace InteractiveNotes.Data.Repositories
 {
+    /// <summary>
+    /// CRUD operations with Note table
+    /// </summary>
     public class NoteRepository : INoteRepository
     {
         private readonly InteractiveNotesDbContext _context;

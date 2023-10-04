@@ -7,7 +7,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InteractiveNotes", "Interac
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InteractiveNotes.Data", "InteractiveNotes.Data\InteractiveNotes.Data.csproj", "{9759F957-AABF-425E-A20D-75D25D1FEB7A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InteractiveNotes.Tests", "InteractiveNotes.Tests\InteractiveNotes.Tests.csproj", "{0F8C80FA-209B-4CCC-8F82-12C457BD3B3A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InteractiveNotes.Tests", "InteractiveNotes.Tests\InteractiveNotes.Tests.csproj", "{0F8C80FA-209B-4CCC-8F82-12C457BD3B3A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AF2457DC-04CE-46F0-80F3-DD62B5C0CAB9}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

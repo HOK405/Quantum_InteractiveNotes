@@ -3,6 +3,9 @@
 @inject NoteService NoteService
 
 @code {
+    /// <summary>
+    /// Event to refresh page while adding new note.
+    /// </summary>
     public event Action? OnNoteAdded;
 
     private NoteDto newNote = new NoteDto();

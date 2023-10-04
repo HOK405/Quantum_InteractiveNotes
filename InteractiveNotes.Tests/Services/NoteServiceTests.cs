@@ -126,7 +126,7 @@ namespace InteractiveNotes.Tests.Services
         public async Task UpdateNoteAsync_ShouldThrowKeyNotFoundException_WhenNoteNotFound()
         {
             // Arrange
-            int nonExistentNoteId = 999; // Assuming this ID does not exist in the repository.
+            int nonExistentNoteId = 999;
             var noteDto = new NoteDto { NoteId = nonExistentNoteId };
 
             // Setup the repository to return null for the non-existent note
@@ -167,7 +167,7 @@ namespace InteractiveNotes.Tests.Services
         public async Task DeleteNoteAsync_ShouldThrowKeyNotFoundException_WhenNoteNotFound()
         {
             // Arrange
-            int nonExistentId = 999; // Assuming this ID does not exist in the repository.
+            int nonExistentId = 999; 
             _mockRepo.Setup(repo => repo.GetNoteByIdAsync(nonExistentId)).ReturnsAsync((Note)null);
 
             // Act and Assert
