@@ -1,6 +1,7 @@
 ﻿@inject NoteService NoteService
 @inject NavigationManager NavigationManager
 
+@using InteractiveNotes.DTO;
 @using InteractiveNotes.Data
 @using Microsoft.AspNetCore.Components
 
@@ -9,17 +10,18 @@
 
     private string viewButtonLabel = "View note";
     private string editButtonLabel = "Edit note";
+
+    private string errorMessage = string.Empty;
+
     private string originalContent;
     private string originalTitle;
 
     private bool IsExpanded { get; set; } = false;
     private bool IsEditing { get; set; } = false;
 
-    protected override Task OnInitializedAsync()
-    {
-        return base.OnInitializedAsync();
-    }
-
+    /// <summary>
+    /// Toggle the note expanding.
+    /// </summary>
     private void ToggleExpand()
     {
         if (IsEditing && IsExpanded)
@@ -33,12 +35,18 @@
         viewButtonLabel = IsExpanded ? "Hide note" : "View note";
     }
 
+    /// <summary>
+    /// Deleting note and navigating to Index.
+    /// </summary>
     private async void DeleteNote()
     {
         await NoteService.DeleteNoteAsync(NoteData.NoteId);
         NavigationManager.NavigateTo("/", true);
     }
 
+    /// <summary>
+    /// Editing note and changing the button with label (Edit note/Stop editing).
+    /// </summary>
     private void EditNote()
     {
         if (!IsExpanded)
@@ -62,14 +70,36 @@
         }
     }
 
+    /// <summary>
+    /// Saving note with the new data and changing the label of the "Edit" button.
+    /// </summary>
     private async void SaveNote()
     {
+        if (string.IsNullOrWhiteSpace(NoteData.Title) || string.IsNullOrWhiteSpace(NoteData.Content))
+        {
+            errorMessage = "Title and Content cannot be empty.";
+            return; 
+        }
+
         await NoteService.UpdateNoteAsync(NoteData);
         IsEditing = false;
         editButtonLabel = "Edit note";
+        errorMessage = string.Empty; 
     }
 
-    private int DaysSinceLastModified => (DateTime.Now - NoteData.CreatingDate).Days;
+    private string FormatDate(DateTime creationDate)
+    {
+        var difference = DateTime.Now - creationDate;
+
+        if (difference.TotalDays < 1)
+            return "Created today";
+        else if (difference.TotalDays < 2)
+            return "Yesterday";
+        else
+            return $"{difference.Days} days ago";
+    }
+
+    private int CreatingDate => (DateTime.Now - NoteData.CreatingDate).Days;
 }
 
 
@@ -83,7 +113,7 @@
         {
             <span class="title">@NoteData.Title</span>
         }
-        <span class="date">@DaysSinceLastModified days ago</span>
+        <span class="date">@FormatDate(NoteData.CreatingDate)</span>
         <div class="actions">
             <button @onclick="() => ToggleExpand()">@viewButtonLabel</button>
             <button @onclick="() => EditNote()">@editButtonLabel</button>
@@ -94,6 +124,10 @@
         @if (IsEditing)
         {
             <textarea @bind="NoteData.Content" class="editing-area"></textarea>
+            @if (!string.IsNullOrEmpty(errorMessage))
+            {
+                <div class="error-message">@errorMessage</div>
+            }
             <div class="right-actions">
                 <button @onclick="() => SaveNote()">Save</button>
                 <button @onclick="() => DeleteNote()">Delete</button>

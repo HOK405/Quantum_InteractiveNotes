@@ -1,11 +1,12 @@
 ﻿using AutoMapper;
 using InteractiveNotes.Data.Entities;
+using InteractiveNotes.DTO;
 
-namespace InteractiveNotes.Data
+namespace InteractiveNotes.Mapping
 {
-    public class MappingProfile : Profile
+    public class NoteMappingProfile : Profile
     {
-        public MappingProfile()
+        public NoteMappingProfile()
         {
             CreateMap<Note, NoteDto>();
             CreateMap<NoteDto, Note>();

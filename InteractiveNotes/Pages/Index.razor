@@ -1,4 +1,5 @@
 ﻿@page "/"
+@using InteractiveNotes.DTO;
 @using InteractiveNotes.Data;
 @inject NoteService NoteService
 <CreateNoteModal @ref="createNoteModal" />
@@ -9,14 +10,17 @@
     <span>Total notes: @notes.Count()</span>
 </div>
 
-@foreach (var note in notes.Where(n => n.Title.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) || n.Content.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)))
+@foreach (var note in notes.Where(n => n.Title.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) || 
+                                  n.Content.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)))
 {
-    <Note NoteData="@note" />
+    <NoteComponent NoteData="@note" />
 }
 
 @code {
     private List<NoteDto> notes = new List<NoteDto>();
+
     private string searchTerm = string.Empty;
+
     private CreateNoteModal createNoteModal;
 
     protected override async Task OnInitializedAsync()

@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InteractiveNotes", "Interac
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InteractiveNotes.Data", "InteractiveNotes.Data\InteractiveNotes.Data.csproj", "{9759F957-AABF-425E-A20D-75D25D1FEB7A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestForPostgre", "TestForPostgre\TestForPostgre.csproj", "{8BBA37C3-4F90-465C-BD7B-031835838CB8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InteractiveNotes.Tests", "InteractiveNotes.Tests\InteractiveNotes.Tests.csproj", "{0F8C80FA-209B-4CCC-8F82-12C457BD3B3A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{9759F957-AABF-425E-A20D-75D25D1FEB7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9759F957-AABF-425E-A20D-75D25D1FEB7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9759F957-AABF-425E-A20D-75D25D1FEB7A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8BBA37C3-4F90-465C-BD7B-031835838CB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8BBA37C3-4F90-465C-BD7B-031835838CB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8BBA37C3-4F90-465C-BD7B-031835838CB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8BBA37C3-4F90-465C-BD7B-031835838CB8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F8C80FA-209B-4CCC-8F82-12C457BD3B3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F8C80FA-209B-4CCC-8F82-12C457BD3B3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F8C80FA-209B-4CCC-8F82-12C457BD3B3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F8C80FA-209B-4CCC-8F82-12C457BD3B3A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,4 +1,5 @@
 ﻿@using InteractiveNotes.Data;
+ @using InteractiveNotes.DTO;
 @inject NoteService NoteService
 
 @code {
@@ -6,6 +7,7 @@
 
     private NoteDto newNote = new NoteDto();
     private bool isVisible = false;
+    private string errorMessage = string.Empty; 
 
     public void ShowModal()
     {
@@ -17,14 +19,20 @@
     {
         isVisible = false;
         newNote = new NoteDto();
+        errorMessage = string.Empty; 
     }
 
     private async Task AddNote()
     {
+        if (string.IsNullOrWhiteSpace(newNote.Title) || string.IsNullOrWhiteSpace(newNote.Content))
+        {
+            errorMessage = "Title and content cannot be empty.";
+            StateHasChanged(); 
+            return;
+        }
+
         await NoteService.AddNoteAsync(newNote);
-
         CloseModal();
-
         OnNoteAdded?.Invoke();
     }
 }
@@ -34,11 +42,17 @@
         <span class="close" @onclick="CloseModal">&times;</span>
         <div class="modal-body">
             <h2>Create new note</h2>
+            
             <label>Title:</label>
             <input @bind="newNote.Title" type="text" placeholder="Note title..." class="title-input" />
-            <label>Content:</label>
+            
+            <label>Content:</label>          
             <textarea @bind="newNote.Content" placeholder="Note content..." class="note-textarea"></textarea>
+            @if (!string.IsNullOrEmpty(errorMessage))
+            {
+                <div class="error-message">@errorMessage</div>
+            }
             <button @onclick="AddNote" class="add-note-button">Add note</button>
-        </div> 
+        </div>
     </div>
 </div>

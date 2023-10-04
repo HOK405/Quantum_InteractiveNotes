@@ -1,4 +1,4 @@
-﻿namespace InteractiveNotes.Data
+﻿namespace InteractiveNotes.DTO
 {
     public class NoteDto
     {
