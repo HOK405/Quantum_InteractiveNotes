@@ -8,7 +8,7 @@ The solution consists of the following projects:
 
 - **InteractiveNotes** - This is the main Blazor Server Application project where the web application is implemented.
 
-- **InteractiveNotes.Data** - This project serves as a dynamic library for database access. It encapsulates data access logic and provides an abstraction layer for interacting with the database. This separation of concerns makes the application more maintainable and testable.
+- **InteractiveNotes.Data** - This project serves as a dynamic library for database access. It encapsulates data access logic and provides an abstraction layer for interacting with the database (PostgreSQL). This separation of concerns makes the application more maintainable and testable.
 
 - **InteractiveNotes.Tests** - This project contains unit tests for the services and components used in the Blazor Server App. These tests help ensure the reliability and correctness of the application.
 
